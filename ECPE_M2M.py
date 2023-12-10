@@ -288,6 +288,8 @@ def run():
     max_result_cause_f, max_result_cause_p, max_result_cause_r = [], [], []
     for fold in range(1, 11):
         # model
+        use_gpu = torch.cuda.is_available()
+
         print('build model..')
 
         model = prompt_bert(bert_path)
