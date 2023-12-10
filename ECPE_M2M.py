@@ -62,11 +62,12 @@ class MyDataset(Dataset):
                 break
             line = line.strip().split()
             self.doc_id.append(line[0])
-            d_len = int(line[1])
+            d_len = int(line[1]) # len of document
             pairs = eval('[' + inputFile.readline().strip() + ']')
             pos, cause = zip(*pairs)
 
-            diction = {}
+            diction = {} # cause mapped to emotion
+
             # count the max num of emotion for one cause
             for i in set(pairs):
                 if i[1] in diction.keys():
@@ -96,29 +97,29 @@ class MyDataset(Dataset):
                 mask_full_document = mask_full_document + ' ' + str(i) + ' ' + part_sentence[i - 1]
                 mask_label_full_document = mask_label_full_document + ' [MASK] ' + part_sentence[i - 1]
                 if i in pos:
-                    full_document = full_document + '是 '
+                    full_document = full_document + 'is '
                     if i in cause:
-                        full_document = full_document + '是 '
+                        full_document = full_document + 'is '
                         for j in range(2):
                             if j < len(diction[i]):
                                 full_document = full_document + ' ' + str(diction[i][j]) + ' '
                             else:
-                                full_document = full_document + ' 无 '
+                                full_document = full_document + " isn't "
                     else:
-                        full_document = full_document + '非 '
-                        full_document = full_document + ' 无 无 '
+                        full_document = full_document + "isn't "
+                        full_document = full_document + " isn't isn't "
                 else:
-                    full_document = full_document + '非 '
+                    full_document = full_document + "isn't "
                     if i in cause:
-                        full_document = full_document + '是 '
+                        full_document = full_document + 'is '
                         for j in range(opt.num_for_M):
                             if j < len(diction[i]):
                                 full_document = full_document + ' ' + str(diction[i][j]) + ' '
                             else:
-                                full_document = full_document + ' 无 '
+                                full_document = full_document + " isn't "
                     else:
-                        full_document = full_document + '非 '
-                        full_document = full_document + ' 无 无'
+                        full_document = full_document + "isn't "
+                        full_document = full_document + " isn't isn't "
 
                 full_document = full_document + '[SEP]'
                 mask_full_document = mask_full_document + "[MASK] [MASK] [MASK][MASK][SEP]"
@@ -170,7 +171,7 @@ class MyDataset(Dataset):
 
 
 class prompt_bert(torch.nn.Module):
-    def __init__(self, bert_path='./bert-base-chinese'):
+    def __init__(self, bert_path='./bert-base-uncased'): #./bert-base-chinese'):
         super(prompt_bert, self).__init__()
         self.bert = BertForMaskedLM.from_pretrained(bert_path)
         self.tokenizer = BertTokenizer.from_pretrained(bert_path)
@@ -276,7 +277,7 @@ def run():
         # sys.stdout = open(save_path + '/' + opt.log_file_name, 'w')
 
     print_time()
-    bert_path = './bert-base-chinese'
+    bert_path = './bert-base-uncased' #'./bert-base-chinese'
     tokenizer = BertTokenizer.from_pretrained(bert_path)
 
     # train
