@@ -106,8 +106,8 @@ class MyDataset(Dataset):
                             else:
                                 full_document = full_document + " isnt " # wtf
                     else:
-                        full_document = full_document + "isnt "
-                        # full_document = full_document + " isnt isnt " #WTF
+                        # full_document = full_document + "isnt "
+                        full_document = full_document + " isnt isnt " #WTF
                 else:
                     full_document = full_document + "isnt "
                     if i in cause:
@@ -118,8 +118,8 @@ class MyDataset(Dataset):
                             else:
                                 full_document = full_document + " isnt "
                     else:
-                        full_document = full_document + "isnt "
-                        # full_document = full_document + " isnt isnt "
+                        # full_document = full_document + "isnt "
+                        full_document = full_document + " isnt isnt "
 
                 full_document = full_document + '[SEP]'
                 mask_full_document = mask_full_document + "[MASK] [MASK] [MASK][MASK][SEP]"
