@@ -100,14 +100,14 @@ class MyDataset(Dataset):
                     full_document = full_document + 'is '
                     if i in cause:
                         full_document = full_document + 'is '
-                        for j in range(2):
+                        for j in range(2):  ## SET MAX COUNT OF CAUSE FOR EACH EMOTION HERE. CURRENTLY , IT IS 2.
                             if j < len(diction[i]):
-                                full_document = full_document + ' ' + str(diction[i][j]) + ' '
+                                full_document = full_document + ' ' + str(diction[i][j]) + ' '  ## WTF ? IS IT SEQUENTIAL MODULE???
                             else:
-                                full_document = full_document + " isnt "
+                                full_document = full_document + " isnt " # wtf
                     else:
                         full_document = full_document + "isnt "
-                        full_document = full_document + " isnt isnt "
+                        # full_document = full_document + " isnt isnt " #WTF
                 else:
                     full_document = full_document + "isnt "
                     if i in cause:
@@ -119,7 +119,7 @@ class MyDataset(Dataset):
                                 full_document = full_document + " isnt "
                     else:
                         full_document = full_document + "isnt "
-                        full_document = full_document + " isnt isnt "
+                        # full_document = full_document + " isnt isnt "
 
                 full_document = full_document + '[SEP]'
                 mask_full_document = mask_full_document + "[MASK] [MASK] [MASK][MASK][SEP]"
