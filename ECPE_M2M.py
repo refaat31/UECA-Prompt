@@ -104,22 +104,22 @@ class MyDataset(Dataset):
                             if j < len(diction[i]):
                                 full_document = full_document + ' ' + str(diction[i][j]) + ' '
                             else:
-                                full_document = full_document + " isn't "
+                                full_document = full_document + " isnt "
                     else:
-                        full_document = full_document + "isn't "
-                        full_document = full_document + " isn't isn't "
+                        full_document = full_document + "isnt "
+                        full_document = full_document + " isnt isnt "
                 else:
-                    full_document = full_document + "isn't "
+                    full_document = full_document + "isnt "
                     if i in cause:
                         full_document = full_document + 'is '
                         for j in range(opt.num_for_M):
                             if j < len(diction[i]):
                                 full_document = full_document + ' ' + str(diction[i][j]) + ' '
                             else:
-                                full_document = full_document + " isn't "
+                                full_document = full_document + " isnt "
                     else:
-                        full_document = full_document + "isn't "
-                        full_document = full_document + " isn't isn't "
+                        full_document = full_document + "isnt "
+                        full_document = full_document + " isnt isnt "
 
                 full_document = full_document + '[SEP]'
                 mask_full_document = mask_full_document + "[MASK] [MASK] [MASK][MASK][SEP]"
@@ -157,7 +157,7 @@ class MyDataset(Dataset):
         print('n_cut {}'.format(self.n_cut))
         print('load data done!\n')
 
-        self.index = [i for i in range(len(self.y_cause))]
+        self.index = [i for i in range(len(self.gt_cause))]
         print("num_for_over_limit{}".format(cnt_over_limit))
 
     def __getitem__(self, index):
